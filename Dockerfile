@@ -5,6 +5,6 @@ WORKDIR /app
 
 COPY package.json /app
 
-RUN npm install --production
+RUN yarn install --production
 
 ADD /dist /app
