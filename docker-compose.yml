@@ -45,6 +45,8 @@ services:
             - ./client/assets/images/teamLogo:/app/client/assets/teamLogo
         links:
             - mongo
+        ports:
+            - "80:8080"
         env_file: .env
         command: bash -c "node server"
         environment:
