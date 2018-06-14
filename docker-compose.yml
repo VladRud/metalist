@@ -1,10 +1,10 @@
 version: '2'
 
 services:
-    nginx-p:
+    nginx:
         restart: always
         image: nginx
-        container_name: nginx-p
+        container_name: nginx
         ports:
           - "80:80"
           - "443:443"
@@ -22,15 +22,15 @@ services:
           - "/var/run/docker.sock:/tmp/docker.sock:ro"
           - "./volumes/proxy/templates/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro"
         volumes_from:
-          - nginx-p
-        entrypoint: /usr/local/bin/docker-gen -notify-sighup nginx-p -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+          - nginx
+        entrypoint: /usr/local/bin/docker-gen -notify-sighup nginx -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
 
     letsencrypt-nginx-proxy-companion:
         restart: always
         image: jrcs/letsencrypt-nginx-proxy-companion
         container_name: letsencrypt-nginx-proxy-companion
         volumes_from:
-          - nginx-p
+          - nginx
         volumes:
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
           - "./volumes/proxy/certs:/etc/nginx/certs:rw"
