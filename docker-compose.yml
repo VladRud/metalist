@@ -48,9 +48,9 @@ services:
         env_file: .env
         command: bash -c "node server"
         environment:
-            - VIRTUAL_HOST=metalist1925.club
+            - VIRTUAL_HOST=pocchamp.com
             - VIRTUAL_NETWORK=nginx-proxy
             - VIRTUAL_PORT=80
-            - LETSENCRYPT_HOST=metalist1925.club
+            - LETSENCRYPT_HOST=pocchamp.com
     mongo:
         image: mongo
