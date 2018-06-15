@@ -1,7 +1,6 @@
 node_modules
 .tmp
 .idea
-#dist
 npm-debug.log.*
 all.log
 .env
