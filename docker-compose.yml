@@ -42,6 +42,7 @@ services:
         restart: always
         container_name: web
         volumes:
+            - "./volumes/nginx-web/conf.d/:/etc/nginx/conf.d"
             - ./client/assets/images/teamLogo:/app/client/assets/teamLogo
         links:
             - mongo
