@@ -1,5 +1,4 @@
 FROM node:boron
-EXPOSE 8080
 EXPOSE 80
 RUN mkdir /app
 WORKDIR /app
