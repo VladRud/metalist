@@ -1,5 +1,5 @@
 FROM node:boron
-
+EXPOSE 80
 RUN mkdir /app
 WORKDIR /app
 
