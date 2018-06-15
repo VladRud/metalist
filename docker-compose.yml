@@ -6,7 +6,7 @@ services:
         image: nginx
         container_name: nginx
         ports:
-          - "80:80"
+          - "80:8080"
           - "443:443"
         volumes:
           - "/etc/nginx/conf.d"
@@ -46,13 +46,11 @@ services:
         links:
             - mongo
         env_file: .env
-        ports:
-          - 8080
         command: bash -c "node server"
         environment:
             - VIRTUAL_HOST=pocchamp.com
             - VIRTUAL_NETWORK=nginx-proxy
-            - VIRTUAL_PORT=80
+            - VIRTUAL_PORT=8080
             - LETSENCRYPT_HOST=pocchamp.com
     mongo:
         image: mongo
