@@ -20,7 +20,12 @@
       <td> {{ticket.row}}</td>
       <td> {{ticket.seat}}</td>
       <td> {{ticket.reservedUntil | date}}</td>
-      <td><a class="btn btn-primary btn-sm" (click)="handleDelete(ticket)">{{'admin.delete' | translate}}</a>
+      <td>
+        <ng-container>
+          <a class="btn btn-primary btn-sm" *ngIf="isCashier; else elseBlock" (click)="print(ticket)">{{'cashbox.message5' | translate}}</a>
+          <ng-template #elseBlock><a class="btn btn-primary btn-sm" (click)="handleDelete(ticket)">{{'admin.delete' | translate}}</a></ng-template>
+        </ng-container>
+      </td>
     </tr>
     </tbody>
   </table>

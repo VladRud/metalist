@@ -7,5 +7,6 @@ export interface SeasonTicket {
   seat: number;
   tribune: string;
   reservedUntil: string;
+  reservationType: string;
   status: string;
 }

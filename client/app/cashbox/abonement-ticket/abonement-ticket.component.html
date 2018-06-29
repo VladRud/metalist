@@ -40,7 +40,8 @@
 <div class="col-md-8" *ngIf="seasonTickets">
   <p [hidden]="!abonementMessage">{{('message.abonement.' + abonementMessage) | translate}}</p>
   <abonement-ticket-list [seasonTickets]="seasonTickets"
-                         (deleteTicket)="handleDeleteTicket($event)"></abonement-ticket-list>
+                         (deleteTicket)="handleDeleteTicket($event)"
+                         (printTicket)="printTicket($event)"></abonement-ticket-list>
 
 </div>
 

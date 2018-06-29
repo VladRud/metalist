@@ -34,6 +34,7 @@ let OrderSchema = new Schema({
   },
   paymentDetails: Schema.Types.Mixed,
   tickets: [ {type: Schema.Types.ObjectId, ref: 'Ticket'} ],
+  seasonTickets: [ {type: Schema.Types.ObjectId, ref: 'SeasonTicket'} ],
   seats: [ {type: Schema.Types.ObjectId, ref: 'Seat'} ],
   user: {
     id: String,

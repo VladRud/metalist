@@ -3,6 +3,7 @@ import {CashboxService} from '../cashbox.service';
 import {SeasonTicketService} from '../../services/season-ticket.service';
 import {Ticket} from '../../model/ticket.interface';
 import {Subject} from 'rxjs/Subject';
+import {PrintTicketService} from '../../services/print-ticket.service';
 
 @Component({
   selector: 'app-abonement-ticket',
@@ -21,7 +22,8 @@ export class AbonementTicketComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
 
   constructor(private cashboxService: CashboxService,
-              private seasonTicketService: SeasonTicketService) {
+              private seasonTicketService: SeasonTicketService,
+              private printTicketService: PrintTicketService) {
   }
 
   ngOnInit() {
@@ -86,6 +88,10 @@ export class AbonementTicketComponent implements OnInit, OnDestroy {
           }
         }
       );
+  }
+
+  public printTicket(ticket): void {
+    this.printTicketService.print([ticket]);
   }
 
 }

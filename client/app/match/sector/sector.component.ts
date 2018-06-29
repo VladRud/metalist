@@ -239,9 +239,14 @@ export class SectorComponent implements OnInit {
     this.cartService.pay(this.currentPriceType.freeMessageStatus, this.customPrice)
       .subscribe(
         order => {
-          const data = order.tickets.map(ticket => {
-            return ({...ticket, ...ticket.seat, customPrice: this.customPrice});
-          });
+          let data = [];
+          order.seasonTickets.length ?
+            data = order.seasonTickets.map(ticket => {
+              return ({...ticket});
+            }) :
+            data = order.tickets.map(ticket => {
+              return ({...ticket, ...ticket.seat, customPrice: this.customPrice});
+            });
           this.printTicketService.print(data, this.currentPriceType.freeMessageStatus);
           this.getReservedSeats();
           this.getSelectedSeats();

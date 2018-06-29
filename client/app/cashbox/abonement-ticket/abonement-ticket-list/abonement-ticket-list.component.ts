@@ -1,4 +1,5 @@
-import {Component, Input, OnInit, Output, EventEmitter, OnChanges} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {AuthService} from '../../../services/auth.service';
 
 
 @Component({
@@ -9,9 +10,20 @@ import {Component, Input, OnInit, Output, EventEmitter, OnChanges} from '@angula
 export class AbonementTicketListComponent {
   @Input() seasonTickets;
   @Output() deleteTicket = new EventEmitter<any>();
+  @Output() printTicket = new EventEmitter<any>();
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
-  handleDelete = (ticket) => this.deleteTicket.emit(ticket)
+  get isCashier(): boolean {
+    return this.authService.isCashier();
+  }
+
+  public handleDelete(ticket): void {
+    this.deleteTicket.emit(ticket);
+  }
+
+  public print(ticket): void {
+    this.printTicket.emit(ticket);
+  }
 }

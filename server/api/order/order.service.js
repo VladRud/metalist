@@ -204,10 +204,13 @@ function createDescription(order) {
   return `${order.privateId} | ${matchesDescription}`;
 }
 
-export function createTicketsByOrder(order, freeMessageStatus = null, customPrice = null) {
+export function createTicketsByOrder(order, freeMessageStatus = null, customPrice = null, isCashier = false) {
   return Promise.all(order.seats.map(seat => {
       if (seat.match.abonement) {
-        seasonTicketService.createSeasonTicket(seat);
+        const seasonTicket = seasonTicketService.createSeasonTicket(seat);
+        if (isCashier) {
+          return seasonTicket;
+        }
       }
       return ticketService.createTicket(seat, freeMessageStatus, customPrice);
     })

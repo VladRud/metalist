@@ -27,7 +27,7 @@
       </div>
     </div>
     <div>
-      <div *ngIf="isCashier; else notCashierBlock">
+      <div *ngIf="isCashier && match && !match.abonement; else notCashierBlock">
         <mat-form-field>
           <mat-select [(value)]="currentPriceType">
             <mat-option *ngFor="let type of priceTypes" [value]="type">{{type.label | translate}}</mat-option>

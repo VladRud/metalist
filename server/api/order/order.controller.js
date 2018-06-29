@@ -4,6 +4,7 @@ import * as orderService from '../order/order.service';
 import * as seatService from '../seat/seat.service';
 import config from "../../config/environment";
 import * as log4js from 'log4js';
+import {SEASON_TICKET} from "../seat/seat.constants";
 
 const logger = log4js.getLogger('Order Controller');
 
@@ -90,18 +91,20 @@ export function payCashier(req, res) {
     })
     .then(order => {
       return Promise.all([
-        orderService.createTicketsByOrder(order, freeMessageStatus, customPrice),
+        orderService.createTicketsByOrder(order, freeMessageStatus, customPrice, true),
         Promise.resolve(order)
       ]);
     })
     .then(([tickets, order]) => {
-      order.tickets = tickets;
+      tickets.map((ticket) => {
+        ticket.reservationType === SEASON_TICKET ?
+          order.seasonTickets.push(ticket) :
+          order.tickets.push(ticket);
+      });
       return order.save();
-
     })
     .then(respondWithResult(res))
-    .catch(handleError(res))
-    ;
+    .catch(handleError(res));
 }
 
 // private functions ---------------------
@@ -140,7 +143,7 @@ function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function (err) {
     logger.error('Error 1: ' + err);
-    if (err.message == 'notReservedSeat') {
+    if (err.message === 'notReservedSeat') {
       res.status(406).send(err);
     } else {
       res.status(err.statusCode || statusCode).send(err);
