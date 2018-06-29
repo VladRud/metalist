@@ -3,7 +3,7 @@ import config from "../config/environment";
 
 const publicKey = config.liqpay.publicKey;
 const privateKey = config.liqpay.privateKey;
-const apiEndpoint = 'https://www.liqpay.com/api/3/checkout';
+const apiEndpoint = 'https://www.liqpay.ua/api/3/checkout';
 const apiVersion = '3';
 
 export function generatePaymentLink(params) {
